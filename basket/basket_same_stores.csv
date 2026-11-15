@@ -1,0 +1,4 @@
+﻿store,found_items,requested_items,missing_items,total_som,complete
+Globus,0,3,"молоко, сахар, масло",,False
+Kampa,3,3,,136.0,True
+Optobaza,0,3,"молоко, сахар, масло",,False

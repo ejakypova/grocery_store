@@ -1,14 +1,5 @@
 """Очистка grocery_store. Исходные таблицы не изменяются.
 
-Без PostgreSQL (проверенный plain SQL COPY dump):
- python clean_grocery_store.py --dump grocery_store_dump.sql
-
-Из PostgreSQL (pip install "psycopg[binary]"):
-    python clean_grocery_store.py --db
-    python clean_grocery_store.py --db --apply
-Пароль запрашивается скрыто. --apply записывает отдельную схему grocery_clean.
-Магазины читаются из public.stores: Globus, Optobaza, Kampa и новые магазины.
-CSV-отчёты всегда сохраняются в --output (по умолчанию clean_report).
 """
 import argparse
 import csv
@@ -19,8 +10,38 @@ import unicodedata
 from collections import Counter
 from decimal import Decimal, InvalidOperation
 from pathlib import Path
+from openpyxl import load_workbook
 
-VERSION = '1.2'
+VERSION = '1.3'
+
+REFERENCE_FILE = Path(__file__).resolve().parent / "Справочник бренд и категорий.xlsx"
+
+
+def load_reference():
+    wb = load_workbook(REFERENCE_FILE, read_only=True, data_only=True)
+    ws = wb.active
+
+    brands = set()
+    categories = set()
+
+    for row in ws.iter_rows(min_row=2, values_only=True):
+        item_type = str(row[0] or "").strip().lower()
+        value = str(row[1] or "").strip()
+
+        if not value:
+            continue
+
+        if item_type == "brand":
+            brands.add(value)
+
+        elif item_type == "category":
+            categories.add(value)
+
+    wb.close()
+    return sorted(brands), sorted(categories)
+
+
+REFERENCE_BRANDS, REFERENCE_CATEGORIES = load_reference()
 BRANDS = {
  'Простоквашино': ['простоквашино'], 'Домик в деревне': ['домик в деревне'],
  'Чабрец': ['чабрец'], 'Шадринское': ['шадринское'], 'ВМ': ['вм'],
@@ -54,21 +75,54 @@ RULES = [
 ]
 # Более узкие правила имеют приоритет над общими.
 RULES = [
- ('Непродовольственные: подгузники', r'^(подгуз|трусики.*подгуз)'),
- ('Непродовольственные: гигиена и быт', r'^(мыло|шамп|гель|пакеты|салфетки|порошок|зубн|прокладки|чистящ|моющ|средство|набор.*шамп)'),
- ('Мясные полуфабрикаты', r'^(котлет|бифштекс|фрикадель|наг[г]?ет|пельмен|манты|хинкали|фарш)'),
- ('Рыбные полуфабрикаты', r'^(рыбные|лососевые)\s+(палочки|бургеры)'),
- ('Грибы', r'^грибы\b'),
- ('Зелень', r'^(розмарин|джусай|сельдерей|укроп|шпинат|мята|руккола|листья салата|лук зеленый|петрушка)\b'),
- ('Снеки', r'^(гренки|чипсы|сухарики|попкорн)\b'),
- ('Крупы и хлопья', r'^(крупа|хлопья|пшено|овсянка|булгур|перловка)\b'),
- ('Кондитерские изделия', r'^(вафли|пряники|мармелад|зефир|карамель|батончик|кекс|рулет)\b'),
- ('Соусы', r'^(соус|кетчуп|майонез|горчица)\b'),
- ('Приправы', r'^(приправа|специи|перец|соль)\b'),
+    ('Памперсы и трусики', r'^(подгуз|памперс|трусики.*подгуз)'),
+    ('Шампунь', r'^(шампунь|набор.*шампун)'),
+    ('Жидкое мыло', r'^мыло\s+жидк|^жидкое\s+мыло'),
+    ('Мыло', r'^мыло\b'),
+    ('Зубная паста', r'^зубная\s+паста'),
+    ('Зубная щетка', r'^зубная\s+щетк'),
+    ('Ополаскиватель рта', r'^ополаскиватель\s+рта'),
+    ('Гель для душа', r'^гель\s+для\s+душа'),
+    ('Гель для стирки', r'^гель\s+для\s+стирки'),
+    ('Порошок стиральный', r'^(порошок\s+стиральн|стиральный\s+порошок)'),
+    ('Кондиционер для белья', r'^кондиционер\s+для\s+белья'),
+    ('Бальзам для волос', r'^бальзам\s+для\s+волос'),
+    ('Лак для волос', r'^лак\s+для\s+волос'),
+    ('Влажные салфетки', r'^(салфетки\s+влажн|влажные\s+салфетки)'),
+    ('Туалетная бумага', r'^туалетная\s+бумага'),
+    ('Крем', r'^крем\b'),
+    ('Гигиена и быт', r'^(пакеты|прокладки|чистящ|моющ|средство)'),
+    ('Мясные полуфабрикаты', r'^(котлет|бифштекс|фрикадель|наг[г]?ет|пельмен|манты|хинкали|фарш)'),
+    ('Рыбные полуфабрикаты', r'^(рыбные|лососевые)\s+(палочки|бургеры)'),
+    ('Грибы', r'^грибы\b'),
+    ('Зелень', r'^(розмарин|джусай|сельдерей|укроп|шпинат|мята|руккола|листья салата|лук зеленый|петрушка)\b'),
+    ('Снеки', r'^(гренки|чипсы|сухарики|попкорн)\b'),
+    ('Крупы и хлопья', r'^(крупа|хлопья|пшено|овсянка|булгур|перловка)\b'),
+    ('Кондитерские изделия', r'^(вафли|пряники|мармелад|зефир|карамель|батончик|кекс|рулет)\b'),
+    ('Соусы', r'^(соус|кетчуп|майонез|горчица)\b'),
+    ('Приправы', r'^(приправа|специи|перец|соль)\b'),
 ] + RULES
 for _brand in ['Атахан', 'Баркад', 'Мираторг', 'Дияр', 'Аттила', 'Байказан', 'Vici',
                'Egoiste', 'Huggies', 'Pampers', 'Libero', 'Moony', 'Шик']:
     BRANDS.setdefault(_brand, [_brand.lower()])
+# Добавляем бренды из Excel
+for brand in REFERENCE_BRANDS:
+    BRANDS.setdefault(brand, [brand.lower()])
+
+# Объединяем сокращения и полные названия
+BRANDS["Веселый молочник"] = [
+    "веселый молочник",
+    "вм"
+]
+
+BRANDS["Домик в деревне"] = [
+    "домик в деревне",
+    "двд"
+]
+
+# Удаляем отдельную запись ВМ,
+# чтобы не возникало двух совпадений
+BRANDS.pop("ВМ", None)
 
 NUM = r'\d+(?:[.,]\d+)?'
 UNIT = r'(?:килограмм(?:а|ов)?|грамм(?:а|ов)?|миллилитр(?:а|ов)?|литр(?:а|ов)?|кг|мл|гр|г|л)'
@@ -98,17 +152,70 @@ def unit_info(u):
     if u == 'мл' or u.startswith('миллилитр'): return 'л', Decimal('0.001')
     return 'л', Decimal(1)
 
-def extract_product(r):
-    t = clean_text(r['name']); flags = []
-    category = next((c for c, pat in RULES if re.search(pat, t)), None)
-    if not category: flags.append('unknown_category')
+NONFOOD_CATEGORIES = {
+    'Памперсы и трусики',
+    'Мыло',
+    'Жидкое мыло',
+    'Шампунь',
+    'Зубная паста',
+    'Зубная щетка',
+    'Ополаскиватель рта',
+    'Гель для душа',
+    'Гель для стирки',
+    'Порошок стиральный',
+    'Кондиционер для белья',
+    'Бальзам для волос',
+    'Лак для волос',
+    'Влажные салфетки',
+    'Туалетная бумага',
+    'Крем',
+    'Гигиена и быт',
+    'Игрушка',
+    'Средства для стекол и зеркал', 'Пакеты для мусора',
+    'Средства для мытья полов', 'Средства для кухни',
+    'Средства для мытья посуды', 'Средства для сантехники',
+    'Средства для стирки', 'Женская гигиена',
+    'Универсальные чистящие средства',
+}
+
+
+def extract_product(r, forced_category=None):
+    t = clean_text(r['name'])
+    flags = []
+
+    # Определяем категорию по существующим правилам
+    category = next(
+        (c for c, pat in RULES if re.search(pat, t)),
+        None
+)
+
+    # Проверяем наличие категории в Excel
+    category_lookup = {
+        clean_text(c): c
+        for c in REFERENCE_CATEGORIES
+}
+
+    if category:
+        category = category_lookup.get(clean_text(category))
+
+    # Подтвержденная разметка имеет приоритет и участвует в расчете фасовки.
+    if forced_category is not None:
+        category = forced_category
+
+    # Если категория отсутствует в справочнике,
+    # оставляем её неопределённой
+    if not category:
+        flags.append("unknown_category")
+
     brands = [b for b, aliases in BRANDS.items() if any(re.search(r'(?<!\w)' + re.escape(clean_text(a)) + r'(?!\w)', t) for a in aliases)]
     brand = brands[0] if len(brands) == 1 else None
     if not brand: flags.append('unknown_or_ambiguous_brand')
-    nonfood = bool(category and category.startswith('Непродовольственные:'))
+
+    nonfood = category in NONFOOD_CATEGORIES
+
     # Вес ребенка и объем пакета не являются массой/объемом товара.
     package_text = t
-    if category == 'Непродовольственные: подгузники' or re.search(r'^пакеты\b', t):
+    if category == 'Памперсы и трусики' or re.search(r'^пакеты\b', t):
         package_text = ''
     multi = MULTI.search(package_text) or BAGS.search(package_text)
     count = 1; amount = None; base = None
@@ -138,9 +245,7 @@ def extract_product(r):
         features['sold_by_weight'] = True
     if '…' in t or '...' in t:
         flags.append('truncated_name')
-    if nonfood:
-        # Для продуктовой модели эти позиции отбираются отдельно.
-        features['exclude_from_food_model'] = True
+    features['exclude_from_food_model'] = nonfood
     if category == 'Чай':
         features['tea_type'] = next((v for v in ['зеленый', 'черный'] if v in t), None)
         features['form'] = 'пакетированный' if re.search(r'\d+\s*(пак|пирамид)', t) else ('листовой' if re.search('лист|весовой', t) else None)
@@ -193,24 +298,63 @@ def main():
     a=ap.parse_args()
     if a.apply and not a.db: ap.error('--apply разрешён только с --db')
     if not a.max_price.is_finite() or a.max_price<=0: ap.error('Некорректный max-price')
-    conn=None
-    if a.db:
-        import psycopg
-        from psycopg.rows import dict_row
-        conn=psycopg.connect(host=a.host,port=a.port,dbname=a.database,user=a.user,password=getpass.getpass('Пароль PostgreSQL: '),row_factory=dict_row)
-        with conn.cursor() as cur:
-            cur.execute('BEGIN ISOLATION LEVEL REPEATABLE READ')
-            cur.execute('SET TRANSACTION READ ONLY')
-            tables={n:cur.execute('SELECT * FROM public.'+n).fetchall() for n in ('products','price_history','stores')}
-        conn.rollback()
-    else: tables=read_dump(a.dump)
-    stores={str(r['id']):r['name'] for r in tables['stores']}
-    products=[extract_product(r) for r in tables['products']]
-    for product, source in zip(products, tables['products']):
-        product['store_name']=stores.get(str(product['store_id']))
-        product['product_url']=source.get('url')
-        if product['store_name'] is None:
-            raise ValueError(f"Неизвестный store_id: {product['store_id']}")
+    conn = None
+    try:
+        if a.db:
+            import psycopg
+            from psycopg.rows import dict_row
+            db_password = getpass.getpass("Пароль PostgreSQL: ")
+            conn = psycopg.connect(
+                host=a.host, port=a.port, dbname=a.database,
+                user=a.user, password=db_password, row_factory=dict_row
+            )
+            with conn.cursor() as cur:
+                cur.execute('BEGIN ISOLATION LEVEL REPEATABLE READ')
+                cur.execute('SET TRANSACTION READ ONLY')
+                tables = {
+                    n: cur.execute('SELECT * FROM public.' + n).fetchall()
+                    for n in ('products', 'price_history', 'stores')
+                }
+            conn.rollback()
+        else:
+            tables = read_dump(a.dump)
+
+        stores = {str(r['id']): r['name'] for r in tables['stores']}
+        confirmed_categories = {}
+        if a.db:
+            with conn.cursor() as cur:
+                cur.execute("""
+                    SELECT product_id, category
+                    FROM grocery_clean.product_category_labels
+                    WHERE review_status = 'подтверждено'
+                """)
+                confirmed_categories = {
+                    int(row['product_id']): row['category']
+                    for row in cur.fetchall()
+                }
+            conn.rollback()
+
+        products = []
+        applied_count = 0
+        for source in tables['products']:
+            confirmed = confirmed_categories.get(int(source['id']))
+            product = extract_product(source, forced_category=confirmed)
+            product['category_source'] = 'human_verified' if confirmed is not None else 'rules'
+            if confirmed is not None:
+                applied_count += 1
+            product['store_name'] = stores.get(str(product['store_id']))
+            product['product_url'] = source.get('url')
+            if product['store_name'] is None:
+                raise ValueError(f"Неизвестный store_id: {product['store_id']}")
+            products.append(product)
+
+        print('Подтвержденных категорий в БД:', len(confirmed_categories))
+        print('Применено к товарам:', applied_count)
+    except Exception:
+        if conn:
+            conn.close()
+        raise
+
     byid={str(r['product_id']):r for r in products}
     seen=set(); prices=[]; duplicates=0
     for r in sorted(tables['price_history'], key=lambda r:int(r['id'])):

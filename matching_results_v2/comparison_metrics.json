@@ -1,0 +1,127 @@
+{
+  "logistic_regression": {
+    "accuracy": 0.6444444444444445,
+    "macro_f1": 0.625104057667713,
+    "same_precision": 0.4878048780487805,
+    "same_recall": 1.0,
+    "classification_report": {
+      "same": {
+        "precision": 0.4878048780487805,
+        "recall": 1.0,
+        "f1-score": 0.6557377049180327,
+        "support": 20.0
+      },
+      "alternative": {
+        "precision": 0.9393939393939394,
+        "recall": 0.5081967213114754,
+        "f1-score": 0.6595744680851063,
+        "support": 61.0
+      },
+      "different": {
+        "precision": 0.4375,
+        "recall": 0.7777777777777778,
+        "f1-score": 0.56,
+        "support": 9.0
+      },
+      "accuracy": 0.6444444444444445,
+      "macro avg": {
+        "precision": 0.6215662724809067,
+        "recall": 0.7619914996964177,
+        "f1-score": 0.625104057667713,
+        "support": 90.0
+      },
+      "weighted avg": {
+        "precision": 0.7888514207111769,
+        "recall": 0.6444444444444445,
+        "f1-score": 0.6487644072394683,
+        "support": 90.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        20,
+        0,
+        0
+      ],
+      [
+        21,
+        31,
+        9
+      ],
+      [
+        0,
+        2,
+        7
+      ]
+    ]
+  },
+  "random_forest": {
+    "accuracy": 0.6777777777777778,
+    "macro_f1": 0.6279052331683911,
+    "same_precision": 0.4583333333333333,
+    "same_recall": 0.55,
+    "classification_report": {
+      "same": {
+        "precision": 0.4583333333333333,
+        "recall": 0.55,
+        "f1-score": 0.5,
+        "support": 20.0
+      },
+      "alternative": {
+        "precision": 0.7857142857142857,
+        "recall": 0.7213114754098361,
+        "f1-score": 0.7521367521367521,
+        "support": 61.0
+      },
+      "different": {
+        "precision": 0.6,
+        "recall": 0.6666666666666666,
+        "f1-score": 0.631578947368421,
+        "support": 9.0
+      },
+      "accuracy": 0.6777777777777778,
+      "macro avg": {
+        "precision": 0.6146825396825397,
+        "recall": 0.645992714025501,
+        "f1-score": 0.6279052331683911,
+        "support": 90.0
+      },
+      "weighted avg": {
+        "precision": 0.6943915343915343,
+        "recall": 0.6777777777777778,
+        "f1-score": 0.6840505822961963,
+        "support": 90.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        11,
+        9,
+        0
+      ],
+      [
+        13,
+        44,
+        4
+      ],
+      [
+        0,
+        3,
+        6
+      ]
+    ]
+  },
+  "selected_model": "logistic_regression",
+  "train_count": 360,
+  "test_count": 90,
+  "total_pairs": 450,
+  "split_method": "group_disjoint",
+  "connected_components": 148,
+  "overlapping_product_ids": 0,
+  "labels_order": [
+    "same",
+    "alternative",
+    "different"
+  ],
+  "note": "Метрики предварительные; выбор лучшей модели по тесту делает оценку выбранной модели оптимистичной. Для финальной оценки нужен отдельный независимый holdout. Пропуски бренда/категории не считаются несовпадением."
+}

@@ -1,0 +1,49 @@
+{
+  "products": 6437,
+  "source_history_rows": 11953,
+  "duplicate_rows_excluded": 2962,
+  "clean_history_rows": 8991,
+  "products_needing_review": 5789,
+  "eligible_price_rows": 6162,
+  "rules_version": "1.3",
+  "note": "eligible_price проверяет только цену/фасовку; это НЕ подтверждение взаимозаменяемости товаров.",
+  "stores": [
+    {
+      "store_id": "1",
+      "store_name": "Globus",
+      "products": 995,
+      "source_price_rows": 1894,
+      "clean_price_rows": 1396,
+      "duplicates_excluded": 498,
+      "eligible_price_rows": 617,
+      "source_statuses": {
+        "demo_catalog": 996,
+        "public_page": 898
+      }
+    },
+    {
+      "store_id": "2",
+      "store_name": "Optobaza",
+      "products": 1737,
+      "source_price_rows": 5187,
+      "clean_price_rows": 3454,
+      "duplicates_excluded": 1733,
+      "eligible_price_rows": 2356,
+      "source_statuses": {
+        "public_page": 5187
+      }
+    },
+    {
+      "store_id": "3",
+      "store_name": "Kampa",
+      "products": 3705,
+      "source_price_rows": 4872,
+      "clean_price_rows": 4141,
+      "duplicates_excluded": 731,
+      "eligible_price_rows": 3189,
+      "source_statuses": {
+        "public_page": 4872
+      }
+    }
+  ]
+}

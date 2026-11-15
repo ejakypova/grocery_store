@@ -1,0 +1,61 @@
+﻿product_id_a,product_id_b,name_a,name_b,human_label,predicted_label,correct
+3303,4883,Мороже­ное Шин Лайн Золото Макены 200г ЗМЖ 1 шт.,Мороженое Шин-Лайн Золото макены 220г,alternative,alternative,True
+1680,5756,"Шампунь для волос Для всей семьи Яблоко 1,0 л",Шампунь Для всей семьи Облепиха 1000мл,alternative,alternative,True
+686,4535,"Сок IL Primo Мультифрукт с мякотью 0,2 л","Сок MEVA Мультифрукт 0,2л",alternative,different,False
+3083,6399,Шоколад Ritter Sport клубни­ка в нежн йогур­те 100г 1 шт.,Шоколад Ritter sport Какао-Мусс 100г,alternative,alternative,True
+3231,5245,Сыр Талас Даамы Фитнес вес в\у,Сыр Талас даамы Чечел вес,alternative,same,False
+642,5311,Томатная паста Айлана 250 г,"Томатная паста ""Фая"" 3кг",alternative,alternative,True
+1748,4529,"Средство для стекол и поверхностей Выгодная уборка 0,5 л",Средство Mr. Muscle д/стекол и поверхностей лайм 500мл,alternative,same,False
+3085,6244,Шоколад Ritter Sport темн. цельный миндаль 100г 1 шт.,Шоколад Ritter sport Кокос 100г,alternative,alternative,True
+94,3783,Сыр Талас Даамы Голланд­ский 45% вес в/у,Сыр Талас даамы Голландский 45% вес,same,same,True
+3281,3694,Пельме­ни Садко халал говяди­на 450г 1 шт.,Пельмени БонАппети Аппетитные говядина 450г,alternative,alternative,True
+3126,4641,Печенье Мадина топлён молоко вес,Печенье Мадина Топленное молоко вес,same,alternative,False
+1281,2659,Кофе растворимый Wollinger 3D 75 г,Кофе Wollinger IQ 150гр м/у,alternative,alternative,True
+275,3963,Масло олив. Naturella Extra Virgin 500мл ст/б 1 шт.,Масло олив. Fragata Extra virgin стекло 1л,alternative,alternative,True
+39,4096,Лук зеленый шт 1 шт.,Лук зеленый шт,same,same,True
+1748,3430,"Средство для стекол и поверхностей Выгодная уборка 0,5 л",Средство д/мытья стекол Выгод­ная уборка 500мл… 1 шт.,same,same,True
+173,2413,Колбас­ки Риха Туристи­ческие в/к вес в/у,Колбаса Риха Туристические в/у вес,same,alternative,False
+1454,5844,Чай в пирамидках Richard Royal Grape 20 шт,Чай Richard Royal Green.90г,different,different,True
+3082,6399,Шоколад Ritter Sport карамельн мусс 100г 1 шт.,Шоколад Ritter sport Какао-Мусс 100г,alternative,alternative,True
+148,5808,"Йогурт Campina Нежный персик 1,2% 100г 24 1 шт.","Йогурт Campina Нежный клубника 1,2% 100г",same,alternative,False
+170,2419,Колба­са Ал Халал Серве­лат Татар­ский копч 380г в/у 1 шт.,Колбаса Ал Халал Сервелат Бишкек в/у вес,same,alternative,False
+95,3783,Сыр Талас Даамы Голланд­ский 35% вес в/у,Сыр Талас даамы Голландский 45% вес,alternative,alternative,True
+1359,2286,Крем для рук Vitanica Восстановление и Увлажнение 200 мл,Крем Чистая Линия д/лица Питание и увлажнение 50мл,alternative,alternative,True
+437,2558,"Сок Gracio тропик 0,95л т/п RG Brands Казах­стан 12 1 шт.",Сок Gracio Тропик 1л,alternative,alternative,True
+95,5245,Сыр Талас Даамы Голланд­ский 35% вес в/у,Сыр Талас даамы Чечел вес,alternative,alternative,True
+1584,2845,"Мыло жидкое детское Vestar Сердечко 1,0 л",Мыло жид. Vestar Детское сердечко 1л,same,alternative,False
+2696,3371,Мыло жид. Весна Дегтярное 280мл,Мыло УН дегтяр­ное жидк 300мл GL 1 шт.,alternative,alternative,True
+3097,3577,Чипсы Lay's Папри­ка 70г Фрито Лей Россия 25 1 шт.,Чипсы Lays Паприка 40г,alternative,alternative,True
+97,4495,Сыр Dairy Spring Тильзит­ский Premium 55% вес в/у,Сыр Dairy Spring Тильзитский Premium 55% вес,same,same,True
+135,5808,"Йогурт Campina Нежный Персик 0,1% 95г 1 шт.","Йогурт Campina Нежный клубника 1,2% 100г",alternative,alternative,True
+96,3793,Сыр Dairy Spring Тильзит­ский Classic 45% вес в/у,Сыр Dairy Spring Тильзитский Classic 45% вес,same,same,True
+325,6001,Чай Жемчу­жина Нила 100пак 1 шт.,Чай Жемчужина Нила Кения 25пак,alternative,alternative,True
+240,5405,Лапша Rola Жайма №2 вес,Лапша Rola Жайма вес,same,same,True
+2533,3429,Средство Выгодная уборка д/стек. пластиковых окон 500мл,Средство д/мытья стекол Выгод­ная уборка 500мл 1 шт.,same,same,True
+148,3701,"Йогурт Campina Нежный персик 1,2% 100г 24 1 шт.",Йогурт Campina Нежный персик 5% 100г,alternative,different,False
+184,2668,Колбас­ки Салих Охотни­чьи п/к 210г в/у 1 шт.,Колбаски Баркад Охотничьи в/у вес,alternative,alternative,True
+1058,5837,Чай в пакетиках Richard Royal Green 25 шт,Чай Richard Royal Green.80гр. ж/б,different,different,True
+94,5685,Сыр Талас Даамы Голланд­ский 45% вес в/у,Сыр Сут аш Голландский 45% вес,alternative,alternative,True
+148,5818,"Йогурт Campina Нежный персик 1,2% 100г 24 1 шт.","Йогурт Campina Нежный персик 1,2% 100г",same,alternative,False
+99,3778,Сыр Талас Даамы Сметан­ковый 50% большой вес в/у GL,Сыр Талас даамы Голландский 35% вес,alternative,same,False
+330,3870,Чай Greenfield Earl grey fantasy 2г саше 1 шт.,Чай Greenfield Earl Grey Fantasy 200г,different,alternative,False
+316,6115,Чай Greenfield Classic Breakfast 25пак 1 шт.,Чай Greenfield Barberry garden 25пак,alternative,alternative,True
+624,5604,"Макароны Мадина Вермишель тонкая 2,0 кг",Макароны Мадина Вермишель 2 кг,same,alternative,False
+2976,5410,Масло олив.Coopoliva Extra virgin 500мл ст/б 1 шт.,Масло оливковое Coopoliva 500мл ПЭТ,same,alternative,False
+3429,4161,Средство д/мытья стекол Выгод­ная уборка 500мл 1 шт.,Средство д/стекол Clin 500мл,alternative,same,False
+127,4477,Творог Просто­кваши­но 2% 290г т/п 1 шт.,Творог Простоквашино 9% 220гр,alternative,alternative,True
+135,3701,"Йогурт Campina Нежный Персик 0,1% 95г 1 шт.",Йогурт Campina Нежный персик 5% 100г,alternative,alternative,True
+66,4462,"Масло сливоч­ное Ала-Тоо Milk 72,5% 180г 1 шт.","Масло Сливочное Крестьянское Сладкое 82,5% 180г",alternative,alternative,True
+273,3532,Масло олив. Costad`Oro Pomace 250мл ст/б 1 шт.,Масло оливковое Iberica Pomace 250мл ст/б,alternative,alternative,True
+147,5808,"Йогурт Campina Нежный клубни­ка 1,2% 100г 24 1 шт.","Йогурт Campina Нежный клубника 1,2% 100г",same,same,True
+147,5671,"Йогурт Campina Нежный клубни­ка 1,2% 100г 24 1 шт.","Йогурт Campina Нежный персик 0,1% 95г",alternative,different,False
+3100,4331,Чипсы Lay's Смета­на-зелень 37г п/п Фрито Лей Россия 28 1 шт.,Чипсы Lays Сметана-Зелень 80г,alternative,alternative,True
+328,6270,Чай Принцес­са Нури высоко­горный 100пак 1 шт.,чай принцесса нури высокогорный пак. 25х2г,alternative,same,False
+494,4936,Вода Ессен­туки № 4 минерал. газ 1л п/б Россия 6 1 шт.,"Вода Есентуки №17 1,5 л",alternative,alternative,True
+3183,3973,Хлеб Риха Тосто­вый белый 700г 1 шт.,Хлеб Риха Тостовый 400гр,alternative,same,False
+5,3629,Фрика­дельки Баркад говяди­на 450гр GL 1 шт.,"Фрикадельки""Баркад"" говяд. 450гр пачка",same,same,True
+3135,4641,Печенье Любято­во топле­ное молоко вес,Печенье Мадина Топленное молоко вес,same,alternative,False
+1477,5422,Маринад Махеевъ для шашлыка традиционный 300 г.,Маринад Махеевъ Традиционный д/шашлыка 300г,same,alternative,False
+65,3745,"Масло сливоч­ное 82,5% 200г ИП Климен­ко Д.А 1 шт.","Масло Сливочное Dairy Spring Соленое 82,5% 180 гр",alternative,alternative,True
+3094,3564,Чипсы Lay's Шашлык 70г Фрито Лей Россия 25 1 шт.,Чипсы Lays Шашлык 150г,alternative,alternative,True
+3244,5457,Йогурт Campina Нежный клубни­ка 5% 110г 24 1 шт.,Йогурт Нежный клубника 470г,different,same,False

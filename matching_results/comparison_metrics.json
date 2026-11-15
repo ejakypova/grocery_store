@@ -1,0 +1,121 @@
+{
+  "logistic_regression": {
+    "accuracy": 0.5833333333333334,
+    "macro_f1": 0.522781441629064,
+    "same_precision": 0.4583333333333333,
+    "classification_report": {
+      "same": {
+        "precision": 0.4583333333333333,
+        "recall": 0.5789473684210527,
+        "f1-score": 0.5116279069767442,
+        "support": 19.0
+      },
+      "alternative": {
+        "precision": 0.7333333333333333,
+        "recall": 0.5945945945945946,
+        "f1-score": 0.6567164179104478,
+        "support": 37.0
+      },
+      "different": {
+        "precision": 0.3333333333333333,
+        "recall": 0.5,
+        "f1-score": 0.4,
+        "support": 4.0
+      },
+      "accuracy": 0.5833333333333334,
+      "macro avg": {
+        "precision": 0.5083333333333333,
+        "recall": 0.5578473210052158,
+        "f1-score": 0.522781441629064,
+        "support": 60.0
+      },
+      "weighted avg": {
+        "precision": 0.6195833333333334,
+        "recall": 0.5833333333333334,
+        "f1-score": 0.5936572949207451,
+        "support": 60.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        11,
+        7,
+        1
+      ],
+      [
+        12,
+        22,
+        3
+      ],
+      [
+        1,
+        1,
+        2
+      ]
+    ]
+  },
+  "random_forest": {
+    "accuracy": 0.65,
+    "macro_f1": 0.5651907546644389,
+    "same_precision": 0.5625,
+    "classification_report": {
+      "same": {
+        "precision": 0.5625,
+        "recall": 0.47368421052631576,
+        "f1-score": 0.5142857142857142,
+        "support": 19.0
+      },
+      "alternative": {
+        "precision": 0.717948717948718,
+        "recall": 0.7567567567567568,
+        "f1-score": 0.7368421052631579,
+        "support": 37.0
+      },
+      "different": {
+        "precision": 0.4,
+        "recall": 0.5,
+        "f1-score": 0.4444444444444444,
+        "support": 4.0
+      },
+      "accuracy": 0.65,
+      "macro avg": {
+        "precision": 0.5601495726495727,
+        "recall": 0.5768136557610242,
+        "f1-score": 0.5651907546644389,
+        "support": 60.0
+      },
+      "weighted avg": {
+        "precision": 0.6475267094017095,
+        "recall": 0.65,
+        "f1-score": 0.6468727373990532,
+        "support": 60.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        9,
+        10,
+        0
+      ],
+      [
+        6,
+        28,
+        3
+      ],
+      [
+        1,
+        1,
+        2
+      ]
+    ]
+  },
+  "selected_model": "random_forest",
+  "train_count": 240,
+  "test_count": 60,
+  "labels_order": [
+    "same",
+    "alternative",
+    "different"
+  ],
+  "note": "Маленький тест (около 60 пар) и мало different: метрики предварительные. Пары с общими товарами могут попадать в train и test, поэтому оценка может быть оптимистичной."
+}

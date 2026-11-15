@@ -6,7 +6,10 @@ from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, Session
 from sqlalchemy.engine import URL
 from pathlib import Path
 from dotenv import load_dotenv
-load_dotenv(Path(__file__).resolve().parent / ".env")
+load_dotenv(
+    Path(__file__).resolve().parent / ".env",
+    override=True,
+)
 
 
 class Base(DeclarativeBase): pass
@@ -45,7 +48,7 @@ def save_rows(rows):
         password=password,
         host=os.getenv("DB_HOST", "localhost"),
         port=int(os.getenv("DB_PORT", "5432")),
-        database=os.getenv("DB_NAME", "grocery_ds"),
+        database=os.getenv("DB_NAME", "grocery_store"),
     )
 
     engine = create_engine(url, pool_pre_ping=True)
