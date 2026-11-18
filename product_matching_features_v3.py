@@ -1,4 +1,4 @@
-"""Feature extraction for product matching v3; missing values remain unknown."""
+"""Признаки для сопоставления товаров."""
 import re
 import numpy as np
 from difflib import SequenceMatcher

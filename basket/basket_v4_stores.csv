@@ -1,4 +1,4 @@
 ﻿store,found_items,requested_items,missing_items,total_som,complete
-Globus,1,3,"молоко, сахар",,False
-Kampa,3,3,,136.0,True
-Optobaza,1,3,"сахар, масло",,False
+Globus,1,2,молоко Белая Река,,False
+Kampa,1,2,молоко Белая Река,,False
+Optobaza,0,2,"Котлеты Атахан говядина 1кг, молоко Белая Река",,False

@@ -1,6 +1,6 @@
 """ML-поиск и предварительное сравнение стоимости.
 
-Читает PostgreSQL, не изменяет данные. Использует обученные модели из v3.
+Читает PostgreSQL, не изменяет данные. Использует обученный модель из v3.
 
 Запуск (с альтернативными вариантами товаров):
  python basket_price_engine_v4.py --basket "молоко,сахар,масло" --include-uncategorized --match-mode alternatives --export basket_v4.csv
@@ -220,7 +220,7 @@ def main():
                     help='same: только same; alternatives: same и alternative')
     ap.add_argument('--include-uncategorized',action='store_true')
     ap.add_argument('--limit',type=int,default=100)
-    ap.add_argument('--category-threshold',type=float,default=.45)
+    ap.add_argument('--category-threshold',type=float,default=.30)
     ap.add_argument('--same-threshold',type=float,default=.8)
     ap.add_argument('--export',help='CSV кандидатов; рядом сохраняются сводки')
     a = ap.parse_args()
